@@ -364,9 +364,11 @@ function App() {
           <p className="text-white/80 text-base drop-shadow-lg mb-2">
             {currentBeach?.shortDescription}
           </p>
-          <p className="text-white/70 text-sm drop-shadow-lg max-w-2xl mx-auto">
-            {currentBeach?.longDescription}
-          </p>
+          {currentBeach?.longDescription && (
+            <p className="text-white/70 text-sm drop-shadow-lg max-w-3xl mx-auto mb-4">
+              {currentBeach?.longDescription}
+            </p>
+          )}
           {offlineMode && (
             <div className="mt-4 bg-yellow-500/20 backdrop-blur-md rounded-xl px-6 py-3 inline-block border border-yellow-400/30">
               <p className="text-yellow-100 font-medium">
