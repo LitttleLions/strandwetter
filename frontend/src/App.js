@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BEACH_CONFIG } from './config/beaches';
+import { BEACH_CONFIG, REGION_CONFIG } from './config/beaches';
 
 // Status-Ampel Komponente
 const StatusIndicator = ({ online, size = 'w-3 h-3' }) => (
@@ -8,6 +8,28 @@ const StatusIndicator = ({ online, size = 'w-3 h-3' }) => (
     <div className={`absolute inset-0 rounded-full ${online ? 'bg-green-400' : 'bg-red-400'} animate-pulse`} />
   </div>
 );
+
+// URL-Parameter lesen
+const getRegionFromUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('region') || 'default';
+};
+
+// Verfügbare Strände für die aktuelle Region
+const getAvailableBeaches = (region) => {
+  const regionConfig = REGION_CONFIG[region] || REGION_CONFIG['default'];
+  return regionConfig.beaches.reduce((acc, beachKey) => {
+    if (BEACH_CONFIG[beachKey]) {
+      acc[beachKey] = BEACH_CONFIG[beachKey];
+    }
+    return acc;
+  }, {});
+};
+
+// Region-Info
+const getRegionInfo = (region) => {
+  return REGION_CONFIG[region] || REGION_CONFIG['default'];
+};
 
 // Fallback-Daten für Offline-Modus
 const FALLBACK_WEATHER_DATA = {
