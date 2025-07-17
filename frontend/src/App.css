@@ -1,14 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom beach-themed styles */
+/* Custom beach-themed fonts */
+:root {
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Poppins', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  font-family: var(--font-primary);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+/* Enhanced beach-themed styles */
 .beach-gradient {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+.glass-morphism {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 .sand-texture {
-  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0);
+  background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0);
   background-size: 20px 20px;
 }
 
@@ -21,126 +44,146 @@
   50% { transform: translateY(-5px); }
 }
 
-/* Responsive text sizing */
-@media (max-width: 640px) {
-  .responsive-text {
-    font-size: 0.875rem;
-  }
+/* Modern card hover effects */
+.modern-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
 }
 
-/* Custom scrollbar for better mobile experience */
+.modern-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced button styles */
+.beach-button {
+  @apply relative overflow-hidden transition-all duration-300 transform hover:scale-105 active:scale-95;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.beach-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.beach-button:hover::before {
+  left: 100%;
+}
+
+/* Status indicator pulse */
+.status-indicator {
+  animation: status-pulse 2s infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* Weather icon animations */
+.weather-icon {
+  animation: float 3s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-3px) rotate(1deg); }
+  66% { transform: translateY(-2px) rotate(-1deg); }
+}
+
+/* Improved typography */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
 }
 
-/* Custom beach-themed hover effects */
-.beach-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.beach-card {
-  transition: all 0.3s ease;
-}
-
-/* Weather icon animations */
-.weather-icon {
-  animation: float 2s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-3px); }
-}
-
-/* Beach score pulse animation */
-.score-pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
-}
-
-/* Mobile-first responsive design */
+/* Enhanced mobile responsiveness */
 @media (max-width: 768px) {
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
   
-  .grid-responsive {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .grid-responsive {
+  .mobile-grid {
     grid-template-columns: 1fr;
   }
+  
+  .text-responsive {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+  }
+  
+  .heading-responsive {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
 }
 
-/* Custom button styles */
-.beach-button {
-  @apply bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-medium py-3 px-6 rounded-xl shadow-lg hover:from-blue-600 hover:to-cyan-700 transition-all duration-200 transform hover:scale-105;
+/* High contrast support */
+@media (prefers-contrast: high) {
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-white {
+    color: #000 !important;
+  }
 }
 
-.beach-button:active {
-  transform: scale(0.98);
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wave-animation,
+  .weather-icon,
+  .status-indicator,
+  .modern-card {
+    animation: none !important;
+  }
+  
+  * {
+    transition: none !important;
+  }
 }
 
-/* Loading animation */
-.loading-spin {
-  animation: spin 1s linear infinite;
+/* Loading states */
+.loading-shimmer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Glass morphism effect */
-.glass-effect {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Custom utility classes */
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.border-gradient {
-  border: 1px solid;
-  border-image: linear-gradient(45deg, #667eea, #764ba2) 1;
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-  transition: all 0.2s ease;
-}
-
-/* Focus styles for accessibility */
-button:focus,
-input:focus,
-select:focus {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 /* Custom beach-themed shadows */
@@ -152,39 +195,115 @@ select:focus {
   box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
 }
 
-/* Mobile optimization */
-@media (max-width: 640px) {
-  .mobile-padding {
-    padding: 1rem;
-  }
-  
-  .mobile-text {
-    font-size: 0.9rem;
-  }
-  
-  .mobile-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
+.shadow-beach-xl {
+  box-shadow: 0 30px 60px rgba(59, 130, 246, 0.5);
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid rgba(0, 0, 0, 0.3);
-  }
+/* Interactive elements */
+.interactive-glow {
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  .wave-animation,
-  .weather-icon,
-  .score-pulse {
-    animation: none;
-  }
-  
-  * {
-    transition: none !important;
-  }
+.interactive-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.interactive-glow:hover::after {
+  opacity: 1;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
+/* Custom animations for weather elements */
+@keyframes temperature-rise {
+  0% { transform: scaleY(0.5); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes wind-blow {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+@keyframes wave-motion {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-2px) scaleY(0.95); }
+}
+
+.temperature-animation {
+  animation: temperature-rise 1s ease-out;
+}
+
+.wind-animation {
+  animation: wind-blow 2s ease-in-out infinite;
+}
+
+.wave-animation {
+  animation: wave-motion 3s ease-in-out infinite;
+}
+
+/* Enhanced gradient backgrounds */
+.gradient-ocean {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-sunrise {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+}
+
+.gradient-sunset {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.gradient-storm {
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+/* Beach theme colors */
+.text-ocean {
+  color: #0080ff;
+}
+
+.text-sand {
+  color: #f5e6d3;
+}
+
+.text-coral {
+  color: #ff6b6b;
+}
+
+.text-seagrass {
+  color: #00b894;
+}
+
+.bg-ocean {
+  background-color: #0080ff;
+}
+
+.bg-sand {
+  background-color: #f5e6d3;
+}
+
+.bg-coral {
+  background-color: #ff6b6b;
+}
+
+.bg-seagrass {
+  background-color: #00b894;
 }
