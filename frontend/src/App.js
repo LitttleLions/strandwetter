@@ -232,7 +232,7 @@ function App() {
     fetchWeatherData(selectedBeach);
   };
 
-  if (loading) {
+  if (loading && !weatherData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-500 to-blue-600 flex items-center justify-center">
         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg">
@@ -245,7 +245,7 @@ function App() {
     );
   }
 
-  if (error) {
+  if (error && !weatherData) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-500 to-blue-600 flex items-center justify-center">
         <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg max-w-md mx-4">
@@ -254,7 +254,7 @@ function App() {
             <h2 className="text-xl font-bold text-gray-800 mb-2">Fehler</h2>
             <p className="text-gray-600 mb-4">{error}</p>
             <button
-              onClick={() => fetchWeatherData(selectedBeach)}
+              onClick={handleRetry}
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
               Erneut versuchen
