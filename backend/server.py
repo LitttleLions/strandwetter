@@ -243,9 +243,11 @@ async def get_beach_weather(beach_name: str):
         
         # Use cached data if it's less than 30 minutes old
         if cached_data and (datetime.now() - cached_data["timestamp"]).seconds < 1800:
+            # Remove MongoDB ObjectId before returning
+            cached_data.pop('_id', None)
             return {
                 "beach": beach_name,
-                "data": cached_data,
+                "data": cached_data["data"],
                 "cached": True
             }
         
