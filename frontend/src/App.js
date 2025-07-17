@@ -378,10 +378,26 @@ function App() {
             {/* Refresh Button */}
             <div className="text-center mt-6">
               <button
-                onClick={() => fetchWeatherData(selectedBeach)}
-                className="bg-white/90 backdrop-blur-sm text-blue-600 px-6 py-3 rounded-xl font-medium hover:bg-white transition-colors shadow-lg border border-blue-100"
+                onClick={handleRetry}
+                className={`backdrop-blur-sm text-blue-600 px-6 py-3 rounded-xl font-medium transition-colors shadow-lg border border-blue-100 ${
+                  loading 
+                    ? 'bg-gray-100 cursor-not-allowed' 
+                    : offlineMode 
+                      ? 'bg-yellow-100 text-yellow-700 border-yellow-200 hover:bg-yellow-200'
+                      : 'bg-white/90 hover:bg-white'
+                }`}
+                disabled={loading}
               >
-                🔄 Aktualisieren
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                    <span>Laden...</span>
+                  </div>
+                ) : (
+                  <>
+                    🔄 {offlineMode ? 'Echte Daten laden' : 'Aktualisieren'}
+                  </>
+                )}
               </button>
             </div>
           </>
