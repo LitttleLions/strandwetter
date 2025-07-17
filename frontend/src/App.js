@@ -327,7 +327,17 @@ function App() {
   const currentWeather = weatherData?.data;
   const forecast = currentWeather?.forecast;
   const marine = currentWeather?.marine;
-  const currentBeach = BEACH_CONFIG[selectedBeach];
+  const currentBeach = availableBeaches[selectedBeach];
+
+  if (!currentBeach) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-500 to-blue-600 flex items-center justify-center">
+        <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg">
+          <p className="text-lg font-medium text-gray-800">Keine Strände für diese Region konfiguriert.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div 
@@ -349,10 +359,13 @@ function App() {
             🏖️ StrandWetter
           </h1>
           <p className="text-white/90 text-xl font-medium drop-shadow-lg mb-2">
-            {currentBeach?.name} • Rügen • Deutschland
+            {currentBeach?.name} • {regionInfo.name}
           </p>
-          <p className="text-white/80 text-sm drop-shadow-lg">
-            {currentBeach?.description}
+          <p className="text-white/80 text-base drop-shadow-lg mb-2">
+            {currentBeach?.shortDescription}
+          </p>
+          <p className="text-white/70 text-sm drop-shadow-lg max-w-2xl mx-auto">
+            {currentBeach?.longDescription}
           </p>
           {offlineMode && (
             <div className="mt-4 bg-yellow-500/20 backdrop-blur-md rounded-xl px-6 py-3 inline-block border border-yellow-400/30">
@@ -367,6 +380,7 @@ function App() {
         <BeachSelector
           selectedBeach={selectedBeach}
           onBeachSelect={handleBeachSelect}
+          availableBeaches={availableBeaches}
         />
 
         {currentWeather && (
@@ -429,18 +443,44 @@ function App() {
               />
             </div>
 
-            {/* Beach Features */}
-            <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30 mb-8">
-              <h3 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand-Features</h3>
-              <div className="flex flex-wrap gap-2">
-                {currentBeach?.features.map((feature, index) => (
-                  <span
-                    key={index}
-                    className="bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/40"
-                  >
-                    {feature}
-                  </span>
-                ))}
+            {/* Strand-Informationen */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* Beach Features */}
+              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30">
+                <h3 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand-Features</h3>
+                <div className="flex flex-wrap gap-2">
+                  {currentBeach?.features.map((feature, index) => (
+                    <span
+                      key={index}
+                      className="bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/40"
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Strand-Details */}
+              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30">
+                <h3 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand-Details</h3>
+                <div className="space-y-3 text-white/90">
+                  <div className="flex justify-between">
+                    <span className="font-medium">Strandtyp:</span>
+                    <span>{currentBeach?.beachType}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Windschutz:</span>
+                    <span className="capitalize">{currentBeach?.windProtection}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Barrierefreiheit:</span>
+                    <span className="capitalize">{currentBeach?.accessibility}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="font-medium">Bewertung:</span>
+                    <span>⭐ {currentBeach?.userRating}/5</span>
+                  </div>
+                </div>
               </div>
             </div>
 
