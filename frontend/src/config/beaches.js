@@ -14,7 +14,7 @@ export const BEACH_CONFIG = {
     windProtection: 'gut',
     beachType: 'Sandstrand',
     accessibility: 'excellent',
-    region: 'nordost'
+    region: 'baeder'
   },
   'Sellin': {
     name: 'Sellin',
@@ -42,7 +42,7 @@ export const BEACH_CONFIG = {
     windProtection: 'gut',
     beachType: 'Sandstrand',
     accessibility: 'good',
-    region: 'moenchgut'
+    region: 'baeder'
   },
   'Baabe': {
     name: 'Baabe',
@@ -72,22 +72,20 @@ export const BEACH_CONFIG = {
     accessibility: 'good',
     region: 'nordost'
   },
-
-  'Prerow': {
-    name: 'Prerow',
-    emoji: '🌾',
+  'Prora': {
+    name: 'Prora',
+    emoji: '🏄',
     coordinates: { latitude: 54.36, longitude: 13.71 },
-    shortDescription: 'Charmantes Ostseebad auf dem Darß mit feinem Sandstrand',
-    longDescription: 'Prerow auf der Halbinsel Fischland-Darß-Zingst ist ein traditionsreiches Seebad, umgeben vom Darßwald, mit kilometerlangem, feinsandigem Strand und der historischen Seemannskirche als weithin sichtbare Landmarke.',
-    backgroundImage: 'https://images.unsplash.com/photo-1560185127-6c44ae70d0fb?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0NDE5MzV8MHwxfHNlYXJjaHwyfHxwcmVyb3clMjBiZWFjaHxlbnwwfHx8fGx1eWVzfDE2MjM0OTY0MzN8&ixlib=rb-4.0.3&q=85',
-    userRating: 4.4,
-    features: ['Feiner Sandstrand', 'Darßwald', 'Seemannskirche', 'Seebrücke'],
+    shortDescription: 'Ruhiger Strand zwischen Sellin und Göhren',
+    longDescription: 'Baabe besticht durch seine ruhige, naturbelassene Atmosphäre. Zwischen Sellin und Göhren gelegen, bietet er ideale Bedingungen für Kitesurfer und Naturliebhaber.',
+    backgroundImage: 'https://images.pexels.com/photos/96389/pexels-photo-96389.jpeg',
+    userRating: 4.1,
+    features: ['Ruhig', 'Naturstrand', 'Kitesurfen', 'Dünenlandschaft'],
     windProtection: 'schwach',
     beachType: 'Sandstrand',
-    accessibility: 'good',
-    region: 'ost'
+    accessibility: 'moderate',
+    region: 'moenchgut'
   },
-
   'Lobbe': {
     name: 'Lobbe',
     emoji: '🌿',
