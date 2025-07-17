@@ -207,11 +207,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Open-Meteo API Integration"
-    - "Beach Weather Endpoints"
-    - "Beach Scoring Algorithm"
     - "Beach Selection Interface"
     - "Weather Dashboard"
+    - "3-Day Forecast"
+    - "Beach-Themed UI Design"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
