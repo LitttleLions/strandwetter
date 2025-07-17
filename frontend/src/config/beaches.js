@@ -57,11 +57,11 @@ export const BEACH_CONFIG = {
     beachType: 'Sandstrand',
     accessibility: 'moderate',
     region: 'moenchgut'
-  }
+  },
     'Sassnitz': {
     name: 'Sassnitz',
     emoji: '⚓',
-    coordinates: { latitude: 54.516728, longitude: 13.644119 },
+    coordinates: { latitude: 54.51, longitude: 13.64 },
     shortDescription: 'Ostseebad am Jasmund mit eindrucksvoller Kreideküste',
     longDescription: 'Sassnitz liegt auf der Halbinsel Jasmund im Nordosten Rügens und ist bekannt für seine steilen Kreidefelsen im Nationalpark Jasmund, den historischen Fährhafen Mukran sowie die elegante Bäderarchitektur im Kurviertel.',
     backgroundImage: 'https://images.unsplash.com/photo-1581089781785-083cfc3dc5de?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0NDE5MzV8MHwxfHNlYXJjaHwyfHxqYXNtYW5kJTIwYmVhY2h8ZW58MHx8fGx1eWVzfDE2MjM0OTYxMjV8&ixlib=rb-4.0.3&q=85',
@@ -76,7 +76,7 @@ export const BEACH_CONFIG = {
   'Prerow': {
     name: 'Prerow',
     emoji: '🌾',
-    coordinates: { latitude: 54.44694, longitude: 12.56778 },
+    coordinates: { latitude: 54.44, longitude: 12.56 },
     shortDescription: 'Charmantes Ostseebad auf dem Darß mit feinem Sandstrand',
     longDescription: 'Prerow auf der Halbinsel Fischland-Darß-Zingst ist ein traditionsreiches Seebad, umgeben vom Darßwald, mit kilometerlangem, feinsandigem Strand und der historischen Seemannskirche als weithin sichtbare Landmarke.',
     backgroundImage: 'https://images.unsplash.com/photo-1560185127-6c44ae70d0fb?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0NDE5MzV8MHwxfHNlYXJjaHwyfHxwcmVyb3clMjBiZWFjaHxlbnwwfHx8fGx1eWVzfDE2MjM0OTY0MzN8&ixlib=rb-4.0.3&q=85',
@@ -91,10 +91,10 @@ export const BEACH_CONFIG = {
   'Lobbe': {
     name: 'Lobbe',
     emoji: '🌿',
-    coordinates: { latitude: 54.317787, longitude: 13.719735 },
+    coordinates: { latitude: 54.31, longitude: 13.71 },
     shortDescription: 'Idyllischer Naturstrand im Südosten Rügens',
     longDescription: 'Lobbe ist ein Dorf auf der Halbinsel Mönchgut mit naturbelassenem Ostseestrand, weitläufigen Dünenlandschaften, dem traditionellen Windschöpfwerk und dem Findling Fritz-Worm-Stein am Kap Lobber Ort.',
-    backgroundImage: 'https://images.unsplash.com/photo-1563366281687-415b0ffb5b5a?crop=entropy&cs=srgb&fm=jpg&ixid=Mnw0NDE5MzV8MHwxfHNlYXJjaHwyfHxsYm9iYmUlMjBiZWFjaHxlbnwwfHx8fGx1eWVzfDE2MjM0OTcwNjR8&ixlib=rb-4.0.3&q=85',
+    backgroundImage: 'https://www.urlaub-auf-ruegen.de/lobbe/fotos/strand-lobbe-gross.jpg',
     userRating: 4.2,
     features: ['Naturstrand', 'Dünen', 'Windschöpfwerk', 'Fritz-Worm-Stein'],
     windProtection: 'gut',
