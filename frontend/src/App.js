@@ -280,6 +280,13 @@ function App() {
           <p className="text-blue-100 text-lg">
             Rügen • Deutschland
           </p>
+          {offlineMode && (
+            <div className="mt-2 bg-yellow-500/20 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
+              <p className="text-yellow-100 text-sm">
+                📱 Offline-Modus • Beispieldaten
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Beach Selector */}
