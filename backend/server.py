@@ -32,7 +32,10 @@ BEACHES = {
     "Binz": {"latitude": 54.40, "longitude": 13.61, "name": "Binz"},
     "Sellin": {"latitude": 54.38, "longitude": 13.69, "name": "Sellin"},
     "Göhren": {"latitude": 54.34, "longitude": 13.74, "name": "Göhren"},
-    "Baabe": {"latitude": 54.36, "longitude": 13.71, "name": "Baabe"}
+    "Baabe": {"latitude": 54.36, "longitude": 13.71, "name": "Baabe"},
+    "Sassnitz": {"latitude": 54.516728, "longitude": 13.644119, "name": "Sassnitz"},
+    "Prerow": {"latitude": 54.44694, "longitude": 12.56778, "name": "Prerow"},
+    "Lobbe": {"latitude": 54.317787, "longitude": 13.719735, "name": "Lobbe"}
 }
 
 class WeatherData(BaseModel):
