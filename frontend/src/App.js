@@ -387,13 +387,6 @@ function App() {
 
         {currentWeather && (
           <>
-            {/* Beach Score */}
-            <BeachScore
-              score={currentWeather.beach_score || 0}
-              bestTime={currentWeather.best_time}
-              online={!offlineMode}
-            />
-
             {/* Current Weather Grid */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <WeatherCard
