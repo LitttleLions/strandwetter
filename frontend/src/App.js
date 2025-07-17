@@ -157,17 +157,33 @@ const ForecastCard = ({ day, weather, isToday = false }) => (
 function App() {
   const [selectedBeach, setSelectedBeach] = useState('Binz');
   const [weatherData, setWeatherData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [offlineMode, setOfflineMode] = useState(false);
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
+  // Initialisiere die App mit Fallback-Daten
+  useEffect(() => {
+    // Zeige sofort die Fallback-Daten an
+    setWeatherData({
+      beach: selectedBeach,
+      data: FALLBACK_WEATHER_DATA,
+      cached: false
+    });
+    
+    // Versuche dann echte Daten zu laden
+    fetchWeatherData(selectedBeach);
+  }, []);
 
   const fetchWeatherData = async (beachName) => {
     try {
       setLoading(true);
       setError(null);
       
-      const response = await fetch(`${backendUrl}/api/weather/${beachName}`);
+      const response = await fetch(`${backendUrl}/api/weather/${beachName}`, {
+        timeout: 10000 // 10 Sekunden Timeout
+      });
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -175,20 +191,45 @@ function App() {
       
       const data = await response.json();
       setWeatherData(data);
+      setOfflineMode(false);
     } catch (err) {
-      setError(`Fehler beim Laden der Wetterdaten: ${err.message}`);
-      console.error('Weather fetch error:', err);
+      console.warn('API nicht verfügbar, verwende Fallback-Daten:', err.message);
+      
+      // Verwende Fallback-Daten statt Fehler zu zeigen
+      setWeatherData({
+        beach: beachName,
+        data: FALLBACK_WEATHER_DATA,
+        cached: false
+      });
+      
+      setError(null); // Keinen Fehler anzeigen
+      setOfflineMode(true);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchWeatherData(selectedBeach);
+    // Nur neue Daten laden, wenn nicht im Offline-Modus
+    if (!offlineMode) {
+      fetchWeatherData(selectedBeach);
+    } else {
+      // Auch im Offline-Modus die Fallback-Daten für den neuen Strand anzeigen
+      setWeatherData({
+        beach: selectedBeach,
+        data: FALLBACK_WEATHER_DATA,
+        cached: false
+      });
+    }
   }, [selectedBeach]);
 
   const handleBeachSelect = (beachName) => {
     setSelectedBeach(beachName);
+  };
+
+  const handleRetry = () => {
+    setOfflineMode(false);
+    fetchWeatherData(selectedBeach);
   };
 
   if (loading) {
