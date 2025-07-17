@@ -199,26 +199,41 @@ const ForecastCard = ({ day, weather, isToday = false, online = true }) => (
 );
 
 function App() {
-  const [selectedBeach, setSelectedBeach] = useState('Binz');
+  const [selectedBeach, setSelectedBeach] = useState('');
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [offlineMode, setOfflineMode] = useState(false);
+  
+  // URL-basierte Region
+  const currentRegion = getRegionFromUrl();
+  const availableBeaches = getAvailableBeaches(currentRegion);
+  const regionInfo = getRegionInfo(currentRegion);
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
+  // Initialisiere mit dem ersten verfügbaren Strand
+  useEffect(() => {
+    const firstBeach = Object.keys(availableBeaches)[0];
+    if (firstBeach && !selectedBeach) {
+      setSelectedBeach(firstBeach);
+    }
+  }, [availableBeaches, selectedBeach]);
+
   // Initialisiere die App mit Fallback-Daten
   useEffect(() => {
-    // Zeige sofort die Fallback-Daten an
-    setWeatherData({
-      beach: selectedBeach,
-      data: FALLBACK_WEATHER_DATA,
-      cached: false
-    });
-    
-    // Versuche dann echte Daten zu laden
-    fetchWeatherData(selectedBeach);
-  }, []);
+    if (selectedBeach) {
+      // Zeige sofort die Fallback-Daten an
+      setWeatherData({
+        beach: selectedBeach,
+        data: FALLBACK_WEATHER_DATA,
+        cached: false
+      });
+      
+      // Versuche dann echte Daten zu laden
+      fetchWeatherData(selectedBeach);
+    }
+  }, [selectedBeach]);
 
   const fetchWeatherData = async (beachName) => {
     try {
