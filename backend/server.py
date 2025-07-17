@@ -69,7 +69,7 @@ async def fetch_weather_data(beach_name: str, coordinates: Dict[str, float]) -> 
     
     # Marine API URL
     marine_url = (
-        f"https://api.open-meteo.com/v1/marine"
+        f"https://marine-api.open-meteo.com/v1/marine"
         f"?latitude={lat}&longitude={lon}"
         f"&hourly=wave_height,wave_direction,wave_period,sea_surface_temperature"
         f"&timezone=Europe/Berlin&forecast_days=3"
