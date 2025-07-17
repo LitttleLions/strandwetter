@@ -146,22 +146,31 @@ const BeachScore = ({ score, bestTime, online = true }) => {
   );
 };
 
-const ForecastCard = ({ day, weather, isToday = false }) => (
-  <div className={`bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg border ${
-    isToday ? 'border-blue-500 ring-2 ring-blue-200' : 'border-blue-100'
+const ForecastCard = ({ day, weather, isToday = false, online = true }) => (
+  <div className={`bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border transition-all duration-300 hover:bg-white/25 ${
+    isToday ? 'border-white/60 ring-2 ring-white/30' : 'border-white/30'
   }`}>
-    <div className="text-center">
-      <p className="text-sm text-gray-600 mb-2">
-        {isToday ? 'Heute' : new Date(day).toLocaleDateString('de-DE', { weekday: 'short', day: 'numeric' })}
-      </p>
-      <WeatherIcon weatherCode={weather.weather_code} size="w-12 h-12" />
-      <div className="mt-2">
-        <p className="text-lg font-bold text-gray-800">{Math.round(weather.temperature_2m_max)}°</p>
-        <p className="text-sm text-gray-600">{Math.round(weather.temperature_2m_min)}°</p>
+    <div className="text-center text-white">
+      <div className="flex items-center justify-center gap-2 mb-3">
+        <p className="text-sm font-medium">
+          {isToday ? 'Heute' : new Date(day).toLocaleDateString('de-DE', { weekday: 'short', day: 'numeric' })}
+        </p>
+        <StatusIndicator online={online} size="w-2 h-2" />
       </div>
-      <div className="mt-2 text-xs text-gray-500">
-        <p>UV: {weather.uv_index_max}</p>
-        <p>💧 {weather.precipitation_sum}mm</p>
+      <WeatherIcon weatherCode={weather.weather_code} size="w-16 h-16" />
+      <div className="mt-4">
+        <p className="text-2xl font-bold drop-shadow-lg">{Math.round(weather.temperature_2m_max)}°</p>
+        <p className="text-lg text-white/80">{Math.round(weather.temperature_2m_min)}°</p>
+      </div>
+      <div className="mt-4 text-sm text-white/80 space-y-1">
+        <div className="flex items-center justify-center gap-1">
+          <span>☀️</span>
+          <span>{weather.uv_index_max}</span>
+        </div>
+        <div className="flex items-center justify-center gap-1">
+          <span>💧</span>
+          <span>{weather.precipitation_sum}mm</span>
+        </div>
       </div>
     </div>
   </div>
