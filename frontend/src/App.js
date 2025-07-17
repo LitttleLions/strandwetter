@@ -290,21 +290,36 @@ function App() {
   const currentWeather = weatherData?.data;
   const forecast = currentWeather?.forecast;
   const marine = currentWeather?.marine;
+  const currentBeach = BEACH_CONFIG[selectedBeach];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-500 to-blue-600">
-      <div className="container mx-auto px-4 py-6 max-w-4xl">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${currentBeach?.backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
+    >
+      {/* Overlay für bessere Lesbarkeit */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-cyan-800/50 to-blue-900/60 backdrop-blur-sm"></div>
+      
+      <div className="relative z-10 container mx-auto px-4 py-8 max-w-5xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2">
+          <h1 className="text-6xl font-black text-white mb-4 drop-shadow-2xl tracking-tight">
             🏖️ StrandWetter
           </h1>
-          <p className="text-blue-100 text-lg">
-            Rügen • Deutschland
+          <p className="text-white/90 text-xl font-medium drop-shadow-lg mb-2">
+            {currentBeach?.name} • Rügen • Deutschland
+          </p>
+          <p className="text-white/80 text-sm drop-shadow-lg">
+            {currentBeach?.description}
           </p>
           {offlineMode && (
-            <div className="mt-2 bg-yellow-500/20 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
-              <p className="text-yellow-100 text-sm">
+            <div className="mt-4 bg-yellow-500/20 backdrop-blur-md rounded-xl px-6 py-3 inline-block border border-yellow-400/30">
+              <p className="text-yellow-100 font-medium">
                 📱 Offline-Modus • Beispieldaten
               </p>
             </div>
@@ -323,16 +338,17 @@ function App() {
             <BeachScore
               score={currentWeather.beach_score || 0}
               bestTime={currentWeather.best_time}
+              online={!offlineMode}
             />
 
             {/* Current Weather Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <WeatherCard
                 title="Lufttemperatur"
                 value={Math.round(forecast?.hourly?.temperature_2m[0] || 0)}
                 unit="°C"
                 icon="🌡️"
-                color="text-orange-600"
+                online={!offlineMode}
               />
               
               <WeatherCard
@@ -340,7 +356,7 @@ function App() {
                 value={Math.round(marine?.hourly?.sea_surface_temperature[0] || 0)}
                 unit="°C"
                 icon="🌊"
-                color="text-blue-600"
+                online={!offlineMode}
               />
               
               <WeatherCard
@@ -348,7 +364,7 @@ function App() {
                 value={Math.round(forecast?.hourly?.wind_speed_10m[0] || 0)}
                 unit="km/h"
                 icon="💨"
-                color="text-gray-600"
+                online={!offlineMode}
               />
               
               <WeatherCard
@@ -356,7 +372,7 @@ function App() {
                 value={Math.round(forecast?.hourly?.uv_index[0] || 0)}
                 unit=""
                 icon="☀️"
-                color="text-yellow-600"
+                online={!offlineMode}
               />
               
               <WeatherCard
@@ -364,7 +380,7 @@ function App() {
                 value={Math.round(forecast?.hourly?.precipitation_probability[0] || 0)}
                 unit="%"
                 icon="🌧️"
-                color="text-blue-600"
+                online={!offlineMode}
               />
               
               <WeatherCard
@@ -372,14 +388,29 @@ function App() {
                 value={(marine?.hourly?.wave_height[0] || 0).toFixed(1)}
                 unit="m"
                 icon="🌊"
-                color="text-cyan-600"
+                online={!offlineMode}
               />
             </div>
 
+            {/* Beach Features */}
+            <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30 mb-8">
+              <h3 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand-Features</h3>
+              <div className="flex flex-wrap gap-2">
+                {currentBeach?.features.map((feature, index) => (
+                  <span
+                    key={index}
+                    className="bg-white/30 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium border border-white/40"
+                  >
+                    {feature}
+                  </span>
+                ))}
+              </div>
+            </div>
+
             {/* 3-Day Forecast */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-blue-100">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">3-Tage Vorhersage</h2>
-              <div className="grid grid-cols-3 gap-4">
+            <div className="bg-white/20 backdrop-blur-md rounded-2xl p-8 shadow-xl border border-white/30 mb-8">
+              <h2 className="text-2xl font-bold text-white mb-6 drop-shadow-lg">3-Tage Vorhersage</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {forecast?.daily?.time.slice(0, 3).map((day, index) => (
                   <ForecastCard
                     key={day}
@@ -392,27 +423,28 @@ function App() {
                       precipitation_sum: forecast.daily.precipitation_sum[index]
                     }}
                     isToday={index === 0}
+                    online={!offlineMode}
                   />
                 ))}
               </div>
             </div>
 
             {/* Refresh Button */}
-            <div className="text-center mt-6">
+            <div className="text-center">
               <button
                 onClick={handleRetry}
-                className={`backdrop-blur-sm text-blue-600 px-6 py-3 rounded-xl font-medium transition-colors shadow-lg border border-blue-100 ${
+                className={`backdrop-blur-md px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 shadow-xl border ${
                   loading 
-                    ? 'bg-gray-100 cursor-not-allowed' 
+                    ? 'bg-gray-400/30 cursor-not-allowed text-gray-300 border-gray-400/30' 
                     : offlineMode 
-                      ? 'bg-yellow-100 text-yellow-700 border-yellow-200 hover:bg-yellow-200'
-                      : 'bg-white/90 hover:bg-white'
+                      ? 'bg-yellow-500/30 text-yellow-100 border-yellow-400/50 hover:bg-yellow-500/40 hover:shadow-2xl'
+                      : 'bg-white/30 text-white border-white/40 hover:bg-white/40 hover:shadow-2xl'
                 }`}
                 disabled={loading}
               >
                 {loading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                  <div className="flex items-center space-x-3">
+                    <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
                     <span>Laden...</span>
                   </div>
                 ) : (
