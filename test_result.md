@@ -107,39 +107,48 @@ user_problem_statement: "StrandWetter Deutschland - German beach weather app for
 backend:
   - task: "Open-Meteo API Integration"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented Open-Meteo API integration with forecast and marine APIs for all 4 Rügen beaches. Added intelligent beach scoring algorithm and caching system."
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Fixed marine API endpoint URL (marine-api.open-meteo.com). All API calls working correctly with real data from Open-Meteo. Temperature data reasonable (16-23°C), wave heights valid (0.04-0.58m), timestamps recent. Beach scoring algorithm working (scores: Binz=80, Sellin=70, Göhren=70, Baabe=80)."
 
   - task: "Beach Weather Endpoints"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Created /api/weather/{beach_name}, /api/weather, /api/recommendations endpoints with MongoDB caching and German weather descriptions."
+      - working: true
+        agent: "testing"
+        comment: "TESTED: All endpoints working correctly. GET /api/beaches returns 4 beaches with correct coordinates. Individual beach endpoints (/api/weather/{beach_name}) return proper structure with forecast, marine data, beach scores. GET /api/weather returns data for all beaches. GET /api/recommendations returns sorted recommendations. Fixed MongoDB ObjectId serialization issue."
 
   - task: "Beach Scoring Algorithm"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Implemented intelligent beach scoring (0-100) based on temperature, precipitation, UV index, cloud cover, and wind conditions. Added best time recommendations."
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Beach scoring algorithm working correctly. Scores calculated properly (0-100 scale) based on weather conditions. Best time recommendations generated. Recommendations properly sorted by score (highest first). Algorithm considers temperature (20-28°C ideal), precipitation (lower better), UV index (3-6 ideal), cloud cover, and wind conditions."
 
 frontend:
   - task: "Beach Selection Interface"
