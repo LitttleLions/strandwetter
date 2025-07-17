@@ -270,9 +270,9 @@ function App() {
 
   useEffect(() => {
     // Nur neue Daten laden, wenn nicht im Offline-Modus
-    if (!offlineMode) {
+    if (!offlineMode && selectedBeach) {
       fetchWeatherData(selectedBeach);
-    } else {
+    } else if (selectedBeach) {
       // Auch im Offline-Modus die Fallback-Daten für den neuen Strand anzeigen
       setWeatherData({
         beach: selectedBeach,
