@@ -1,38 +1,190 @@
-.App {
-    text-align: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom beach-themed styles */
+.beach-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+.sand-texture {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0);
+  background-size: 20px 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+.wave-animation {
+  animation: wave 3s ease-in-out infinite;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+@keyframes wave {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
 }
 
-.App-link {
-    color: #61dafb;
+/* Responsive text sizing */
+@media (max-width: 640px) {
+  .responsive-text {
+    font-size: 0.875rem;
+  }
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+/* Custom scrollbar for better mobile experience */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Custom beach-themed hover effects */
+.beach-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.beach-card {
+  transition: all 0.3s ease;
+}
+
+/* Weather icon animations */
+.weather-icon {
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Beach score pulse animation */
+.score-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .grid-responsive {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Custom button styles */
+.beach-button {
+  @apply bg-gradient-to-r from-blue-500 to-cyan-600 text-white font-medium py-3 px-6 rounded-xl shadow-lg hover:from-blue-600 hover:to-cyan-700 transition-all duration-200 transform hover:scale-105;
+}
+
+.beach-button:active {
+  transform: scale(0.98);
+}
+
+/* Loading animation */
+.loading-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Glass morphism effect */
+.glass-effect {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom utility classes */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.border-gradient {
+  border: 1px solid;
+  border-image: linear-gradient(45deg, #667eea, #764ba2) 1;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.2s ease;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Custom beach-themed shadows */
+.shadow-beach {
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+.shadow-beach-lg {
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.4);
+}
+
+/* Mobile optimization */
+@media (max-width: 640px) {
+  .mobile-padding {
+    padding: 1rem;
+  }
+  
+  .mobile-text {
+    font-size: 0.9rem;
+  }
+  
+  .mobile-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .wave-animation,
+  .weather-icon,
+  .score-pulse {
+    animation: none;
+  }
+  
+  * {
+    transition: none !important;
+  }
 }
