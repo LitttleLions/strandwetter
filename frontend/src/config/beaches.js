@@ -6,51 +6,93 @@ export const BEACH_CONFIG = {
     name: 'Binz',
     emoji: '🏖️',
     coordinates: { latitude: 54.40, longitude: 13.61 },
-    description: 'Berühmter Badeort mit historischer Bäderarchitektur',
+    shortDescription: 'Berühmter Badeort mit historischer Bäderarchitektur',
+    longDescription: 'Binz ist der bekannteste Badeort auf Rügen und besticht durch seine prächtige Bäderarchitektur. Die berühmte Seebrücke und die elegante Promenade machen ihn zum perfekten Ziel für anspruchsvolle Strandbesucher.',
     backgroundImage: 'https://images.unsplash.com/photo-1649047516494-65af2c7bcd2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwyfHxnZXJtYW4lMjBiZWFjaHxlbnwwfHx8Ymx1ZXwxNzUyNzMyODQ4fDA&ixlib=rb-4.1.0&q=85',
     userRating: 4.5,
     features: ['Seebrücke', 'Promenade', 'Restaurants', 'Bäderarchitektur'],
     windProtection: 'gut',
     beachType: 'Sandstrand',
-    accessibility: 'excellent'
+    accessibility: 'excellent',
+    region: 'nordost'
   },
   'Sellin': {
     name: 'Sellin',
     emoji: '🌊',
     coordinates: { latitude: 54.38, longitude: 13.69 },
-    description: 'Romantischer Strand mit berühmter Seebrücke',
+    shortDescription: 'Romantischer Strand mit berühmter Seebrücke',
+    longDescription: 'Sellin verzaubert mit seiner romantischen Atmosphäre und der spektakulären Seebrücke. Die Steilküste bietet einzigartige Ausblicke, während die Tauchgondel ein besonderes Erlebnis darstellt.',
     backgroundImage: 'https://images.unsplash.com/photo-1582524072730-90ec37441310?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHxzZWFzaWRlfGVufDB8fHxibHVlfDE3NTI3MzI4NTV8MA&ixlib=rb-4.1.0&q=85',
     userRating: 4.3,
     features: ['Seebrücke', 'Steilküste', 'Tauchgondel', 'Bernstein'],
     windProtection: 'mittel',
     beachType: 'Sandstrand',
-    accessibility: 'good'
+    accessibility: 'good',
+    region: 'moenchgut'
   },
   'Göhren': {
     name: 'Göhren',
     emoji: '⛵',
     coordinates: { latitude: 54.34, longitude: 13.74 },
-    description: 'Familienfreundlicher Strand im Südosten',
+    shortDescription: 'Familienfreundlicher Strand im Südosten',
+    longDescription: 'Göhren im Südosten Rügens ist der ideale Familienstrand. Die geschützte Lage im Mönchgut bietet ruhiges Wasser und weitläufige Dünenlandschaften für entspannte Strandtage.',
     backgroundImage: 'https://images.unsplash.com/photo-1568798330489-8beeab223c65?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwxfHxnZXJtYW4lMjBiZWFjaHxlbnwwfHx8Ymx1ZXwxNzUyNzMyODQ4fDA&ixlib=rb-4.1.0&q=85',
     userRating: 4.2,
     features: ['Familienfreundlich', 'Mönchgut', 'Wanderwege', 'Dünen'],
     windProtection: 'gut',
     beachType: 'Sandstrand',
-    accessibility: 'good'
+    accessibility: 'good',
+    region: 'moenchgut'
   },
   'Baabe': {
     name: 'Baabe',
     emoji: '🏄',
     coordinates: { latitude: 54.36, longitude: 13.71 },
-    description: 'Ruhiger Strand zwischen Sellin und Göhren',
+    shortDescription: 'Ruhiger Strand zwischen Sellin und Göhren',
+    longDescription: 'Baabe besticht durch seine ruhige, naturbelassene Atmosphäre. Zwischen Sellin und Göhren gelegen, bietet er ideale Bedingungen für Kitesurfer und Naturliebhaber.',
     backgroundImage: 'https://images.pexels.com/photos/96389/pexels-photo-96389.jpeg',
     userRating: 4.1,
     features: ['Ruhig', 'Naturstrand', 'Kitesurfen', 'Dünenlandschaft'],
     windProtection: 'schwach',
     beachType: 'Sandstrand',
-    accessibility: 'moderate'
+    accessibility: 'moderate',
+    region: 'moenchgut'
   }
 };
+
+// Regionale Strand-Konfigurationen für verschiedene Standorte
+export const REGION_CONFIG = {
+  'default': {
+    name: 'Rügen Gesamt',
+    description: 'Alle Hauptstrände der Insel Rügen',
+    beaches: ['Binz', 'Sellin', 'Göhren', 'Baabe']
+  },
+  'moenchgut': {
+    name: 'Mönchgut',
+    description: 'Strände in der Mönchgut-Region',
+    beaches: ['Sellin', 'Göhren', 'Baabe']
+  },
+  'nordost': {
+    name: 'Nordost-Rügen',
+    description: 'Strände im Nordosten der Insel',
+    beaches: ['Binz']
+  },
+  'ost': {
+    name: 'Ost-Rügen',
+    description: 'Östliche Strände von Rügen',
+    beaches: ['Binz', 'Sellin', 'Göhren', 'Baabe']
+  },
+  'sued': {
+    name: 'Süd-Rügen',
+    description: 'Südliche Strände der Insel',
+    beaches: ['Sellin', 'Göhren', 'Baabe']
+  }
+};
+
+// Beispiel-URLs:
+// https://app.de?region=moenchgut (zeigt nur Mönchgut-Strände)
+// https://app.de?region=nordost (zeigt nur Binz)
+// https://app.de (zeigt alle Strände)
 
 // Bewertungskriterien für Strände
 export const RATING_CRITERIA = {
