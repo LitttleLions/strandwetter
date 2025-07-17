@@ -456,9 +456,9 @@ function App() {
               </div>
 
               {/* Strand-Details */}
-              <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30">
+              <div className="bg-green-500/30 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-green-400/50">
                 <h3 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand-Details</h3>
-                <div className="space-y-3 text-white/90">
+                <div className="space-y-3 text-white/95">
                   <div className="flex justify-between">
                     <span className="font-medium">Strandtyp:</span>
                     <span>{currentBeach?.beachType}</span>
@@ -473,8 +473,14 @@ function App() {
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Bewertung:</span>
-                    <span>⭐ {currentBeach?.userRating}/5</span>
+                    <span className="text-yellow-200">⭐ {currentBeach?.userRating}/5</span>
                   </div>
+                  {currentWeather.best_time && (
+                    <div className="flex justify-between border-t border-white/30 pt-3 mt-3">
+                      <span className="font-medium">Beste Zeit heute:</span>
+                      <span className="text-green-200 font-semibold">{currentWeather.best_time} Uhr</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
