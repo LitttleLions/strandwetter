@@ -218,3 +218,5 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Implemented complete StrandWetter Deutschland app with Open-Meteo API integration, beach scoring system, and German UI. Ready for backend testing of all API endpoints and data processing logic."
+  - agent: "testing"
+    message: "BACKEND TESTING COMPLETE: All 3 high-priority backend tasks are working correctly. Fixed 2 critical issues: (1) Marine API endpoint URL corrected to marine-api.open-meteo.com, (2) MongoDB ObjectId serialization issue resolved. All 33 backend tests passing. Open-Meteo API integration working with real data, beach scoring algorithm functioning properly (0-100 scale), all endpoints returning correct data structures. Backend is production-ready."
