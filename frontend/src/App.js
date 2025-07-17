@@ -106,12 +106,12 @@ const BeachSelector = ({ selectedBeach, onBeachSelect }) => (
   </div>
 );
 
-const BeachScore = ({ score, bestTime }) => {
+const BeachScore = ({ score, bestTime, online = true }) => {
   const getScoreColor = (score) => {
-    if (score >= 80) return 'text-green-600';
-    if (score >= 60) return 'text-yellow-600';
-    if (score >= 40) return 'text-orange-600';
-    return 'text-red-600';
+    if (score >= 80) return 'from-emerald-400 to-green-500';
+    if (score >= 60) return 'from-yellow-400 to-orange-500';
+    if (score >= 40) return 'from-orange-400 to-red-500';
+    return 'from-red-400 to-red-600';
   };
 
   const getScoreText = (score) => {
@@ -122,19 +122,25 @@ const BeachScore = ({ score, bestTime }) => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl p-6 shadow-lg text-white mb-6">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold mb-2">Strand-Bewertung</h2>
-        <div className="text-4xl font-bold mb-2">
-          {score}/100
-        </div>
-        <p className="text-xl mb-3">{getScoreText(score)}</p>
-        {bestTime && (
-          <div className="bg-white/20 rounded-lg p-3">
-            <p className="text-sm opacity-90">Beste Zeit heute</p>
-            <p className="text-xl font-semibold">{bestTime} Uhr</p>
+    <div className={`bg-gradient-to-br ${getScoreColor(score)} rounded-2xl p-8 shadow-2xl text-white mb-8 relative overflow-hidden`}>
+      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent"></div>
+      <div className="relative z-10">
+        <div className="text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <h2 className="text-3xl font-bold drop-shadow-lg">Strand-Bewertung</h2>
+            <StatusIndicator online={online} size="w-4 h-4" />
           </div>
-        )}
+          <div className="text-6xl font-black mb-4 drop-shadow-lg">
+            {score}/100
+          </div>
+          <p className="text-2xl font-semibold mb-6 drop-shadow-lg">{getScoreText(score)}</p>
+          {bestTime && (
+            <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 border border-white/30">
+              <p className="text-white/90 text-sm font-medium mb-1">Beste Zeit heute</p>
+              <p className="text-2xl font-bold">{bestTime} Uhr</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
