@@ -61,38 +61,44 @@ const WeatherIcon = ({ weatherCode, size = 'w-8 h-8' }) => {
   );
 };
 
-const WeatherCard = ({ title, value, unit, icon, color = 'text-blue-600' }) => (
-  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-blue-100">
+const WeatherCard = ({ title, value, unit, icon, color = 'text-blue-600', online = true }) => (
+  <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30 hover:bg-white/25 transition-all duration-300">
     <div className="flex items-center justify-between">
-      <div>
-        <p className="text-gray-600 text-sm font-medium">{title}</p>
-        <p className={`text-2xl font-bold ${color}`}>
+      <div className="flex-1">
+        <div className="flex items-center gap-2 mb-2">
+          <p className="text-white/90 text-sm font-medium">{title}</p>
+          <StatusIndicator online={online} />
+        </div>
+        <p className={`text-3xl font-bold text-white drop-shadow-lg`}>
           {value}
-          <span className="text-sm text-gray-500 ml-1">{unit}</span>
+          <span className="text-lg text-white/80 ml-2">{unit}</span>
         </p>
       </div>
-      <div className="text-2xl">{icon}</div>
+      <div className="text-4xl ml-4 drop-shadow-lg">{icon}</div>
     </div>
   </div>
 );
 
 const BeachSelector = ({ selectedBeach, onBeachSelect }) => (
-  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-blue-100 mb-6">
-    <h2 className="text-lg font-semibold text-gray-800 mb-3">Strand auswählen</h2>
-    <div className="grid grid-cols-2 gap-3">
-      {Object.entries(BEACHES).map(([key, beach]) => (
+  <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30 mb-8">
+    <h2 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand auswählen</h2>
+    <div className="grid grid-cols-2 gap-4">
+      {Object.entries(BEACH_CONFIG).map(([key, beach]) => (
         <button
           key={key}
           onClick={() => onBeachSelect(key)}
-          className={`p-3 rounded-lg border-2 transition-all duration-200 ${
+          className={`p-4 rounded-xl border-2 transition-all duration-300 backdrop-blur-sm ${
             selectedBeach === key
-              ? 'border-blue-500 bg-blue-50 text-blue-700'
-              : 'border-gray-200 bg-white hover:border-blue-300 text-gray-700'
+              ? 'border-white/60 bg-white/30 text-white shadow-lg'
+              : 'border-white/30 bg-white/10 hover:border-white/50 hover:bg-white/20 text-white/90'
           }`}
         >
-          <div className="flex items-center justify-center space-x-2">
-            <span className="text-xl">{beach.emoji}</span>
-            <span className="font-medium">{beach.name}</span>
+          <div className="flex items-center justify-center space-x-3">
+            <span className="text-2xl">{beach.emoji}</span>
+            <div className="text-left">
+              <div className="font-bold text-lg">{beach.name}</div>
+              <div className="text-sm text-white/80">⭐ {beach.userRating}</div>
+            </div>
           </div>
         </button>
       ))}
