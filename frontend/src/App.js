@@ -101,11 +101,11 @@ const WeatherCard = ({ title, value, unit, icon, color = 'text-blue-600', online
   </div>
 );
 
-const BeachSelector = ({ selectedBeach, onBeachSelect }) => (
+const BeachSelector = ({ selectedBeach, onBeachSelect, availableBeaches }) => (
   <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30 mb-8">
     <h2 className="text-xl font-bold text-white mb-4 drop-shadow-lg">Strand auswählen</h2>
     <div className="grid grid-cols-2 gap-4">
-      {Object.entries(BEACH_CONFIG).map(([key, beach]) => (
+      {Object.entries(availableBeaches).map(([key, beach]) => (
         <button
           key={key}
           onClick={() => onBeachSelect(key)}
