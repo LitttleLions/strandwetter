@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { BEACH_CONFIG } from './config/beaches';
 
-const BEACHES = {
-  'Binz': { name: 'Binz', emoji: '🏖️' },
-  'Sellin': { name: 'Sellin', emoji: '🌊' },
-  'Göhren': { name: 'Göhren', emoji: '⛵' },
-  'Baabe': { name: 'Baabe', emoji: '🏄' }
-};
+// Status-Ampel Komponente
+const StatusIndicator = ({ online, size = 'w-3 h-3' }) => (
+  <div className={`${size} rounded-full ${online ? 'bg-green-500' : 'bg-red-500'} relative`}>
+    <div className={`absolute inset-0 rounded-full ${online ? 'bg-green-400' : 'bg-red-400'} animate-pulse`} />
+  </div>
+);
 
 // Fallback-Daten für Offline-Modus
 const FALLBACK_WEATHER_DATA = {
